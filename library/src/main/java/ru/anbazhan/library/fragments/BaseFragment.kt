@@ -1,6 +1,5 @@
 package ru.anbazhan.library.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.ViewModelProvider
-import javax.inject.Inject
-
 
 abstract class BaseFragment<VM : FragmentViewModel, B : ViewDataBinding> : Fragment() {
 
@@ -19,27 +15,13 @@ abstract class BaseFragment<VM : FragmentViewModel, B : ViewDataBinding> : Fragm
         const val IS_RE_INIT_NEED = "isReInitNeed"
     }
 
-    @Inject
-    lateinit var viewModelFactory: ru.anbazhan.library.base.ViewModelFactory<VM>
-
     protected lateinit var binding: B
 
-    abstract val viewModelType: Class<VM>
     abstract val layoutResId: Int
     abstract val viewModelBRVarId: Int
+    abstract val viewModel: VM
 
     protected var fragmentContainer: ViewGroup? = null
-
-    val viewModel: VM by lazy {
-        ViewModelProvider(this as Fragment, viewModelFactory).get(viewModelType)
-    }
-
-    abstract fun inject()
-
-    override fun onAttach(context: Context) {
-        inject()
-        super.onAttach(context)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
