@@ -1,3 +1,2 @@
 rootProject.name = "mvvmcore"
-include ':app'
 include ':library'

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
-class BaseRVAdapter<T, B : BindingItem<T>>(
+open class BaseRVAdapter<T, B : BindingItem<T>>(
     var items: MutableList<B> = mutableListOf()
 ) : LiveDataBindingRVAdapter<BaseRVAdapter.ViewHolder>() {
 
