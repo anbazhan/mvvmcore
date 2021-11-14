@@ -35,11 +35,8 @@ abstract class BaseDialog<VM : BaseDialogViewModel, B : ViewDataBinding> : Dialo
         binding = DataBindingUtil.inflate(inflater, layoutResId, container, false)
         binding.setVariable(viewModelBRVarId, viewModel)
 
-        arguments?.let {
-            viewModel?.reInit(it)
-        } ?: run {
-            viewModel.reInit(Bundle())
-        }
+        viewModel.reInit(arguments ?: Bundle())
+  
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
