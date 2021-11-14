@@ -6,20 +6,20 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class LiveDataBindingRecyclerViewAdapter<T : LiveDataBindingRecyclerViewAdapter.LiveDataBindingViewHolder> :
-    RecyclerView.Adapter<T>() {
+abstract class LiveDataBindingRVAdapter<VH : LiveDataBindingRVAdapter.ViewHolder> :
+    RecyclerView.Adapter<VH>() {
 
-    override fun onViewAttachedToWindow(holder: T) {
+    override fun onViewAttachedToWindow(holder: VH) {
         super.onViewAttachedToWindow(holder)
         holder.markAttach()
     }
 
-    override fun onViewDetachedFromWindow(holder: T) {
+    override fun onViewDetachedFromWindow(holder: VH) {
         super.onViewDetachedFromWindow(holder)
         holder.markDetach()
     }
 
-    open class LiveDataBindingViewHolder(itemView: View) :
+    open class ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView), LifecycleOwner {
 
         private val lifecycleRegistry = LifecycleRegistry(this)

@@ -9,6 +9,7 @@ class Event<T>(
         if (wasPerformed) {
             null
         } else {
+            wasPerformed = true
             value
         }
 }

@@ -23,32 +23,28 @@ abstract class BaseFragment<VM : FragmentViewModel, B : ViewDataBinding> : Fragm
 
     protected var fragmentContainer: ViewGroup? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        lifecycle.addObserver(viewModel)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        observeViewModel()
 
         binding = DataBindingUtil.inflate(inflater, layoutResId, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
         configureBinding()
 
+        observeViewModel()
         viewModel.reInit(arguments)
 
         fragmentContainer = container
 
         return binding.root
-    }
-
-    protected open fun configureBinding() {
-        if (viewModelBRVarId > 0)
-            binding.setVariable(viewModelBRVarId, viewModel)
-    }
-
-    protected open fun observeViewModel() {
-        lifecycle.addObserver(viewModel as LifecycleObserver)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,4 +56,12 @@ abstract class BaseFragment<VM : FragmentViewModel, B : ViewDataBinding> : Fragm
             }
         }
     }
+
+    protected open fun configureBinding() {
+        if (viewModelBRVarId > 0) {
+            binding.setVariable(viewModelBRVarId, viewModel)
+        }
+    }
+
+    protected open fun observeViewModel() {}
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
@@ -23,6 +24,7 @@ abstract class BaseDialog<VM : BaseDialogViewModel, B : ViewDataBinding> : Dialo
         if (arguments == null) {
             arguments = Bundle()
         }
+        lifecycle.addObserver(viewModel)
     }
 
     override fun onCreateView(
@@ -32,14 +34,13 @@ abstract class BaseDialog<VM : BaseDialogViewModel, B : ViewDataBinding> : Dialo
     ): View? {
         binding = DataBindingUtil.inflate(inflater, layoutResId, container, false)
         binding.setVariable(viewModelBRVarId, viewModel)
-        lifecycle.addObserver(viewModel)
+
         arguments?.let {
             viewModel?.reInit(it)
         } ?: run {
             viewModel.reInit(Bundle())
         }
         binding.lifecycleOwner = viewLifecycleOwner
-        observeViewModel()
         return binding.root
     }
 
@@ -48,6 +49,4 @@ abstract class BaseDialog<VM : BaseDialogViewModel, B : ViewDataBinding> : Dialo
         viewModel.closeAction = { dismiss() }
         return dialog
     }
-
-    protected fun observeViewModel() {}
 }

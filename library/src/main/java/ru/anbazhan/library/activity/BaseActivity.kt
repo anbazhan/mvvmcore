@@ -18,10 +18,14 @@ abstract class BaseActivity<VM : BaseActivityViewModel, B : ViewDataBinding> : A
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        lifecycle.addObserver(viewModel)
+        observeViewModel()
 
         binding = DataBindingUtil.setContentView(this, layoutIdRes)
         binding.setVariable(viewModelBRVarId, viewModel)
         binding.lifecycleOwner = this
+    }
+
+    protected open fun observeViewModel() {
+        lifecycle.addObserver(viewModel)
     }
 }

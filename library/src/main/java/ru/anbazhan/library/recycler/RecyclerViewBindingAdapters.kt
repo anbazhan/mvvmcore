@@ -4,12 +4,12 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 @BindingAdapter("android:items")
-fun <T> RecyclerView.bindItems(items: MutableList<T>?) {
+fun <E> RecyclerView.bindItems(items: MutableList<BindingItem<E>>?) {
     items?.let {
         @Suppress("UNCHECKED_CAST")
         try {
-            if (adapter != null && adapter is BaseBindingRVAdapter<*, *>) {
-                (adapter as BaseBindingRVAdapter<T, *>).updateItems(
+            if (adapter != null && adapter is BaseRVAdapter<*, *>) {
+                (adapter as BaseRVAdapter<E, BindingItem<E>>).updateItems(
                     items
                 )
             }
