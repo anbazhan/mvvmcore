@@ -15,8 +15,8 @@ abstract class LiveDataBindingRVAdapter<VH : LiveDataBindingRVAdapter.ViewHolder
     }
 
     override fun onViewDetachedFromWindow(holder: VH) {
-        super.onViewDetachedFromWindow(holder)
         holder.markDetach()
+        super.onViewDetachedFromWindow(holder)
     }
 
     open class ViewHolder(itemView: View) :

@@ -21,7 +21,7 @@ open class BaseRVAdapter<T, B : BindingItem<T>>(
                 parent,
                 false
             )
-        )
+        ).apply { binding.lifecycleOwner = this }
     }
 
     override fun getItemCount(): Int = items.size
