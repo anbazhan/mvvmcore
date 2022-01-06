@@ -298,7 +298,7 @@ Add RecyclerView in our activity layout.
    android:layout_width="match_parent"
    android:layout_height="0dp"
    android:items="@{viewModel.items}"
-app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+   app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
    app:layout_constraintBottom_toBottomOf="parent"
    app:layout_constraintTop_toBottomOf="@id/my_text" />
 ```
