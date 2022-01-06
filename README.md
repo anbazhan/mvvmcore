@@ -15,18 +15,19 @@ Add into project build.gradle or settings.gradle
 
 ```
 allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
 	}
+}
 ```
+
 Add into app build.gradle
 
-
+```
 dependencies {
-	        implementation 'com.github.anbazhan.mvvmcore:final:VERSION'
-	}
+	implementation 'com.github.anbazhan.mvvmcore:final:VERSION'
+}
 ```
 Add databinding into your project
 
