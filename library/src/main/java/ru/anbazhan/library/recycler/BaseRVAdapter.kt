@@ -29,6 +29,7 @@ open class BaseRVAdapter<T, B : BindingItem<T>>(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position).let {
             holder.binding.setVariable(it.brId, it.item)
+            it.bind(holder.itemView)
         }
     }
 
