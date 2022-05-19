@@ -7,5 +7,5 @@ open class BindingItem<T>(
     val layoutResource: Int,
     val item: T
 ) {
-    fun bind(view: View) {}
+    open fun bind(view: View) {}
 }
